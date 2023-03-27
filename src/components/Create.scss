@@ -1,0 +1,56 @@
+.tasks {
+  list-style: none;
+  padding-inline-start: 0;
+  width: 100%;
+}
+
+.task-display {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.editing input {
+  padding: 0.5rem;
+}
+
+.editing button {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  background-color: white;
+  border: none;
+  color: green;
+  font-size: 2rem;
+  position: absolute;
+  right: 15%;
+}
+
+.checkbox {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.no-edit button {
+  padding: 0.5rem;
+  cursor: pointer;
+  background-color: white;
+  border: none;
+  color: black;
+  font-size: 2rem;
+  position: absolute;
+  right: 15%;
+}
+
+.delete-btn {
+  padding: 0.5rem;
+  cursor: pointer;
+  background-color: white;
+  border: none;
+  color: red;
+  font-size: 2rem;
+  position: absolute;
+  right: 0%;
+}
