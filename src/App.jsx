@@ -1,5 +1,5 @@
-import RenderTask from "./components/Render";
-import "./App.scss";
+import RenderTask from './components/Render';
+import './App.scss';
 
 const App = () => <RenderTask />;
 
