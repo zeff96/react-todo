@@ -1,0 +1,17 @@
+label {
+  display: flex;
+  gap: 1rem;
+}
+
+.add-input {
+  padding: 0.5rem;
+  width: 100%;
+}
+
+.add-btn {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  background-color: blue;
+  border: none;
+  color: white;
+}
