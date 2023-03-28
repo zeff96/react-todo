@@ -1,10 +1,10 @@
-import { useState } from "react";
-import "./Create.scss";
-import { BsFillCheckCircleFill } from "react-icons/bs";
-import { GrEdit } from "react-icons/gr";
-import { FaTrashAlt } from "react-icons/fa";
-import { useTask } from "./Task";
-import { useDispatch } from "./Task";
+/* eslint-disable react/prop-types */
+import { useState } from 'react';
+import './Create.scss';
+import { BsFillCheckCircleFill } from 'react-icons/bs';
+import { GrEdit } from 'react-icons/gr';
+import { FaTrashAlt } from 'react-icons/fa';
+import { useTask, useDispatch } from './Task';
 
 const AddTaskList = () => {
   const tasks = useTask();
@@ -33,7 +33,7 @@ const CreateTaskList = ({ task }) => {
           value={task.text}
           onChange={(e) => {
             dispatch({
-              type: "changed_task",
+              type: 'changed_task',
               task: {
                 ...task,
                 text: e.target.value,
@@ -66,7 +66,7 @@ const CreateTaskList = ({ task }) => {
         checked={task.done}
         onChange={(e) => {
           dispatch({
-            type: "toggle_task",
+            type: 'toggle_task',
             task: {
               ...task,
               done: e.target.checked,
@@ -77,12 +77,10 @@ const CreateTaskList = ({ task }) => {
       {TaskContent}
       <button
         type="button"
-        onClick={() =>
-          dispatch({
-            type: "deleted_task",
-            id: task.id,
-          })
-        }
+        onClick={() => dispatch({
+          type: 'deleted_task',
+          id: task.id,
+        })}
         className="delete-btn"
       >
         <FaTrashAlt />

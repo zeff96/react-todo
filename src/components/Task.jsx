@@ -1,11 +1,14 @@
-import { createContext, useContext, useReducer, useEffect } from "react";
-import taskReducer from "./TaskReducer";
+/* eslint-disable react/prop-types */
+import {
+  createContext, useContext, useReducer, useEffect,
+} from 'react';
+import taskReducer from './TaskReducer';
 
 const TaskContext = createContext(null);
 const TaskDispatchContext = createContext(null);
 
 const getSavedTask = () => {
-  const tasks = JSON.parse(localStorage.getItem("tasks"));
+  const tasks = JSON.parse(localStorage.getItem('tasks'));
   return tasks || [];
 };
 
@@ -13,7 +16,7 @@ export const TaskProvider = ({ children }) => {
   const [tasks, dispatch] = useReducer(taskReducer, getSavedTask());
 
   useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
+    localStorage.setItem('tasks', JSON.stringify(tasks));
   }, [tasks]);
 
   return (
@@ -25,10 +28,6 @@ export const TaskProvider = ({ children }) => {
   );
 };
 
-export const useTask = () => {
-  return useContext(TaskContext);
-};
+export const useTask = () => useContext(TaskContext);
 
-export const useDispatch = () => {
-  return useContext(TaskDispatchContext);
-};
+export const useDispatch = () => useContext(TaskDispatchContext);
