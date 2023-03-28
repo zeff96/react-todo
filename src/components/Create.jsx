@@ -1,31 +1,28 @@
-/* eslint-disable react/prop-types */
-import { useState } from 'react';
-import './Create.scss';
-import { BsFillCheckCircleFill } from 'react-icons/bs';
-import { GrEdit } from 'react-icons/gr';
-import { FaTrashAlt } from 'react-icons/fa';
+import { useState } from "react";
+import "./Create.scss";
+import { BsFillCheckCircleFill } from "react-icons/bs";
+import { GrEdit } from "react-icons/gr";
+import { FaTrashAlt } from "react-icons/fa";
+import { useTask } from "./Task";
+import { useDispatch } from "./Task";
 
-const AddTaskList = ({
-  tasks, onToggleTask, onChangeTask, onDeleteTask,
-}) => (
-  <ul className="tasks">
-    {tasks.map((task) => (
-      <li key={task.id} className="task-item">
-        <CreateTaskList
-          task={task}
-          onToggle={onToggleTask}
-          onChange={onChangeTask}
-          onDelete={onDeleteTask}
-        />
-      </li>
-    ))}
-  </ul>
-);
+const AddTaskList = () => {
+  const tasks = useTask();
 
-const CreateTaskList = ({
-  task, onChange, onToggle, onDelete,
-}) => {
+  return (
+    <ul className="tasks">
+      {tasks.map((task) => (
+        <li key={task.id} className="task-item">
+          <CreateTaskList task={task} />
+        </li>
+      ))}
+    </ul>
+  );
+};
+
+const CreateTaskList = ({ task }) => {
   const [isEditing, setIsEditing] = useState(false);
+  const dispatch = useDispatch();
   let TaskContent;
 
   if (isEditing) {
@@ -35,9 +32,12 @@ const CreateTaskList = ({
           type="text"
           value={task.text}
           onChange={(e) => {
-            onChange({
-              ...task,
-              text: e.target.value,
+            dispatch({
+              type: "changed_task",
+              task: {
+                ...task,
+                text: e.target.value,
+              },
             });
           }}
         />
@@ -65,16 +65,24 @@ const CreateTaskList = ({
         value={task.text}
         checked={task.done}
         onChange={(e) => {
-          onToggle({
-            ...task,
-            done: e.target.checked,
+          dispatch({
+            type: "toggle_task",
+            task: {
+              ...task,
+              done: e.target.checked,
+            },
           });
         }}
       />
       {TaskContent}
       <button
         type="button"
-        onClick={() => onDelete(task.id)}
+        onClick={() =>
+          dispatch({
+            type: "deleted_task",
+            id: task.id,
+          })
+        }
         className="delete-btn"
       >
         <FaTrashAlt />

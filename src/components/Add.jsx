@@ -1,10 +1,11 @@
-/* eslint-disable react/prop-types */
-import { useState } from 'react';
-import { MdOutlineAddCircleOutline } from 'react-icons/md';
-import './Add.scss';
+import { useState } from "react";
+import { MdOutlineAddCircleOutline } from "react-icons/md";
+import "./Add.scss";
+import { useDispatch } from "./Task";
 
-const AddTask = ({ onAddTask }) => {
-  const [text, setText] = useState('');
+const AddTask = () => {
+  const [text, setText] = useState("");
+  const dispatch = useDispatch();
 
   return (
     <label htmlFor="tasks">
@@ -20,9 +21,13 @@ const AddTask = ({ onAddTask }) => {
       <button
         type="button"
         onClick={() => {
-          if (text === '') return;
-          onAddTask(text);
-          setText('');
+          if (text === "") return;
+          dispatch({
+            type: "added_task",
+            id: (nextId += 1),
+            text: text,
+          });
+          setText("");
         }}
         className="add-btn"
       >
@@ -31,5 +36,7 @@ const AddTask = ({ onAddTask }) => {
     </label>
   );
 };
+
+let nextId = 0;
 
 export default AddTask;
